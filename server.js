@@ -1,6 +1,9 @@
 const express= require('express');
 const mongoose= require('mongoose');
 const bodyParser= require('body-parser');
+const User = require('./models/User');
+mongoose.connect('mongodb://localhost/userData')
+
 const port=8000;
 const app= express();
 
@@ -12,19 +15,19 @@ app.listen(port, ()=>{
 
 // CREATE
 app.post('/users',(req,res)=>{
-  // User.create()
+  User.create(req.body)
 })
 
 app.route('/users/:id')
 // READ
 .get((req,res)=>{
-  // User.findById()
+  User.findById(req.params.id)
 })
 // UPDATE
 .put((req,res)=>{
-  // User.findByIdAndUpdate()
+  User.findByIdAndUpdate(req.params.id)
 })
 // DELETE
 .delete((req,res)=>{
-  // User.findByIdAndDelete()
+  User.findByIdAndDelete(req.params.id)
 })
